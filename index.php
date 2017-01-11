@@ -5,7 +5,7 @@
 </head>
 
 <body>
-<div ng-app="myApp" ng-controller="myCtrl">
+<div ng-app="myApp" ng-controller="myCtrl" ng-init="getResults()">
 	<form id="my-search">
 		<label>Search:</label>
 		<input type="text" ng-model="searchTerm"/>
@@ -18,8 +18,20 @@
 
 <script>
 	var app = angular.module('myApp', []);
-	app.controller('myCtrl', function($scope) {
+	app.controller('myCtrl', function($scope, $http) {
 		$scope.searchTerm = 'Your search...';
+		$scope.results = [];
+		$scope.getResults = function() {
+			$http.get('search.php', {
+				params:{
+					'search_term': searchTerm
+				}
+			}).success(function(response){
+				if(response.status == 'OK') {
+					$scope.results = response.records;
+				}
+			})
+		}
 	});
 </script>
 </body>
