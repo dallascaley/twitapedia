@@ -5,26 +5,26 @@
 </head>
 
 <body>
-<div ng-app="myApp" ng-controller="myCtrl" ng-init="getResults()">
+<div ng-app="myApp" ng-controller="myCtrl">
 	<form id="my-search">
 		<label>Search:</label>
-		<input type="text" ng-model="searchTerm"/>
+		<input type="text" ng-model="term" ng-change="getResults()"/>
 		<input type="button" value="Submit" />
 	</form>
 	<div>
-		<h3>Results for: {{searchTerm}}</h3>
+		<h3>Results for: {{term}}</h3>
 	</div>
 </div>
 
 <script>
 	var app = angular.module('myApp', []);
 	app.controller('myCtrl', function($scope, $http) {
-		$scope.searchTerm = 'Your search...';
+		$scope.term = 'Your search...';
 		$scope.results = [];
 		$scope.getResults = function() {
 			$http.get('search.php', {
 				params:{
-					'search_term': searchTerm
+					'search_term': $scope.term
 				}
 			}).success(function(response){
 				if(response.status == 'OK') {
