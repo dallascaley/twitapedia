@@ -9,7 +9,10 @@ class PediaController extends \BaseController {
 	 */
 	public function index()
 	{
-		echo('derp!');
+		$input = Input::all();
+
+		echo json_encode($input);
+
 	}
 
 
