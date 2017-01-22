@@ -11,6 +11,8 @@ class PediaController extends \BaseController {
 	{
 		$input = Input::all();
 
+		//Testing DERP DERP!!
+
 		echo json_encode($input);
 
 	}
