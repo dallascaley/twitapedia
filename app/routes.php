@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', function()
+Route::get('/', 'HomeController@showHome');
+
+Route::resource('pedia', 'PediaController');
+
+Route::get('users', function()
 {
-	return View::make('hello');
+    return 'Users!';
 });
